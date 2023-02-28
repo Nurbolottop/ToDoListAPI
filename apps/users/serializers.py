@@ -14,9 +14,8 @@ class UserDetail(serializers.ModelSerializer):
     # user_posts = CardSerializers(read_only = True, many = True)
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name',
-                 'last_name', 'email','profile_image',
-                 'bio','user_posts')
+        fields = ('id','username','email',
+                  'phone_number','created_at','age')
         
 class RegisterSerializer(serializers.ModelSerializer):
     
@@ -29,8 +28,8 @@ class RegisterSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name',
-                 'last_name','bio', 'email',
+        fields = ('id','username','email',
+                  'phone_number','created_at','age',
                  'password','password2'
                  )
         
