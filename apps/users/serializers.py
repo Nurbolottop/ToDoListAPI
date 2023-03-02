@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from .models import User
+from apps.todo.serializers import ToDoSerializer
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -38,13 +39,12 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         return user
     
 class UserDetail(serializers.ModelSerializer):
-    # user_posts = CardSerializers(read_only = True, many = True)
+    user_todo = ToDoSerializer(read_only = True, many = True)
     class Meta:
         model = User
-        fields = ('username', 'email', 'phone_number', 'age')
+        fields = ('username', 'email', 'phone_number', 'age','user_todo')
         
     def validate(self, attrs):
-
         if '+996' not in attrs['phone_number']:
             raise serializers.ValidationError({"phone_number": "Напишите номер с +996"})
         return attrs
